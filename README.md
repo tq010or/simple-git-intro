@@ -76,14 +76,24 @@ Now the remote repo will contain your latest changes in version control.
 
 In most cases, their changes and your local changes can be merged automatically. 
 If auto merge failed, you then need to manually choose which version to use and delete the undesired part in the data.
+
 Having manually resolved merge failure, you need to do another `git commit -am "Manual merge"`, as you made new changes relative to both `local` and `remote` `git` repo.
 
 
-
 #### Concept 4: Change status in `git`
+(TODO)
 1. Uncommitted vs committed  
 
 1. Local vs Remote 
+
+#### Recipe 1: Create a new repo in remote server and set it up in local git
+#### Recipe 2: Create a new repo in local git and set it up in remote server
+#### Recipe 3: Add existing project in local git and set it up in remote server
+#### Recipe 4: Ignore all my local uncommitted changes
+#### Recipe 5: Ignore all my local committed changes and let the latest remote version to overwride my local version
+#### Recipe 6: Remove a file that is currently in git
+#### Recipe 7: Freeze my current development in this branch, allow me to sth else in other branch, I need to come back to this branch and continue to work from where I left.
+
 
 
 #### FAQ
