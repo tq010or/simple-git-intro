@@ -1,12 +1,11 @@
 # simple-git-intro
 
 `git` is a powerful distributed version control tool, however, its steep learning curve has not been always friendly to beginners.
-This mini-tutorial aims to guide you to use `git` in 10 minutes. It is not comprehensive, but should cover many common scenarios.
+This mini-tutorial aims to guide you to use `git` in 10 minutes by explaining some key concepts. It is not comprehensive, but should cover some common scenarios.
 
 > I assume your computer already has `git` installed and you have general computer operation knowledge. For instance, you know how to open a terminal from your Mac/Linux/Windows.
 
-## Master `git` by understanding key concepts
-#### Concept 1: `git` tracks your data (software code and documents).
+#### Concept 1: `git` tracks your data
 Let's assume you have some code and documents in your local file system (e.g., in `/Users/john/hello_world`) and you want to use `git` to manage them.
 
 You can open a terminal and change to `/Users/john/hello_world` and type
@@ -14,11 +13,12 @@ You can open a terminal and change to `/Users/john/hello_world` and type
 
 Then you need to tell `git` which files you want to put in by typing `git add *`.
 It tells `git` "_hey, please track every file in the current folder for your version control_".
+Of course, you can add one or a few files by specifying their names, e.g., `git add hw.py` to add `hw.py`
 
 Next you type `git commit -am "First version of my code and data"`, as you can guess, this tells `git` "_hey, I've told you the files I want to put in this version control and please remember them_".
 
-`git` will then echo back you commit message and a unique hash string,
-something like this: `e1eff3f0f71c4ea87b50b7df44ada84b490e7577`.
+`git` will then echo back your commit message with a unique hash string (
+something like this: `e1eff3f0f71c4ea87b50b7df44ada84b490e7577`).
 It means "_okay, I will remember current status of your selected files and you can refer them by this unique hash string_".
 
 Next when you decided to make some changes to your version controlled files and you want to `git` to remember your changes. You do this by typing `git commit -am "My new changes"`.
@@ -27,12 +27,14 @@ Again, `git` will reply you with your commit message and a new hash string e.g.,
 You can keep on making changes and commit them to `git`.
 All these changes are remembered in you local `git` version control system.
 
-You can change to previous versions by typing `git checkout e1eff3f0f71c4ea87b50b7df44ada84b490e7577` to view and modify files back then.
+You can view all versions of your data by typing `git log`, `git` will then show your commits (including commit timestamp, message and the unique hash string).
+
+You can also change to previous versions by typing `git checkout e1eff3f0f71c4ea87b50b7df44ada84b490e7577` to view and modify files back then.
 
 So far, all your changes are recorded in `git`'s default location, also know as the `master` branch. I will explain `branch` in the next concept.
 
 #### Concept 2: `git branch` and `git merge` for change management
-When you want to try many different things on your code and don't want to modify the current version in `master`, you can leverage `branch` feature in `git`.
+When you want to try many different things on your code and don't want to modify the current version in `master`, you can leverage the `branch` feature in `git`.
 
 By typing `git branch`, you ask `git`, "_hey, what are current available branches in current version control?_".
 
@@ -53,19 +55,39 @@ You can imagine a typical scenario that many engineers develop their work in the
 Suppose I finished my development in `demo` and commit changes by `git commit -am "Dev for DB is done"`.
 I then switch back to `master` branch and merge my development in `demo` by typing `git merge demo`.
 
+Then your changes in `demo` will be incorporated in `master`.
+
+If we take a bird view for `git` change management: We create and switch to new branches for parallel development. Once they are done with commits, we merge these developments to `master` branch to ensure all changes are recorded in `master` for further development.
  
-#### Concept 3: `git pull` and `git push` collaborations.
+#### Concept 3: `git pull` and `git push` for collaborations.
+So far all your version control and changes are made in local. It is fine if you are the only developer for your project, but in real world, you may need to work with other ppl.
+
+`git pull` and `git push` are the two commands you use to interact with other ppl's work.
+
+Let's start with `git push` first. You have made a few changes in `master` and you have merged your changes from `demo` to `master`. You want to put your contribution to a shared remote location (e.g., often a repository in github.com), so that other ppl can view and modify them.
+
+You type `git remote add origin https://github.com/john/hello_world`. 
+This tells `git`, "_hey, I'd like to have my version control in the remote repository as well, please set up a version control project in github.com under user john and project name hello\_world _".
+
+After that you type `git push`, `git` will then push your current changes in current branch to the remote repo you specified.
+Now the remote repo will contain your latest changes in version control.
+
+`git pull` is similar, `git` pulls data from the `remote` repo you specified. When you are developing something with other ppl, they have `pushed` their changes to the remote repo, you can get their changes to your local by typing `git pull`.
+
+In most cases, their changes and your local changes can be merged automatically. 
+If auto merge failed, you then need to manually choose which version to use and delete the undesired part in the data.
+Having manually resolved merge failure, you need to do another `git commit -am "Manual merge"`, as you made new changes relative to both `local` and `remote` `git` repo.
 
 
-#### Concept 4: 
+
+#### Concept 4: Change status in `git`
+1. Uncommitted vs committed  
+
+1. Local vs Remote 
 
 
+#### FAQ
+1. For quick trouble shooting, I found this cheat sheet is useful:
+https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf
 
-## Git FAQ (x minute)
-1. Quick trouble shooting
-First, use `git branch` to check your local branch,
-then use `git log` to check the commit history,
-then use `git status` to check file changes
-then use `git diff` to inspect changes made so far
-
-
+1. 
