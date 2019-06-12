@@ -81,23 +81,65 @@ Having manually resolved merge failure, you need to do another `git commit -am "
 
 
 #### Concept 4: Change status in `git`
-(TODO)
-1. Uncommitted vs committed  
+From time to time you execute the above commands, you may encounter conflict errors.
+I'd suggest we understand the status of `git` changes.
+1. Uncommitted vs Committed:
+When you made some changes, only if you `git commit` them to local version control that `git` can remember them.
+If you make changes and forget to commit them, these changes are not recognised.
+You can use `git diff` to show whether there are uncommitted changes in your current branch.
 
-1. Local vs Remote 
+1. Tracked vs UnTracked:
+If you add a file into `git`, it is tracked, otherwise, it is untracked.
+You can use `git status` to view tracked and untracked files
+
+1. Local vs Remote:
+As you can imagine there will be different versions in a multi-user environment.
+You `local` commits may be ahead or behind of the `remote`.
+If `local` is ahead of `remote`, you can `git push` to incorporate your changes to `remote` servers.
+If `local` is behind of `remote`, you can `git pull` to other ppls' changes to `local`.
 
 #### Recipe 1: Create a new repo in remote server and set it up in local git
+```
+# Suppose you already created project in github or bitbucket
+$ git clone git@github.com:john/hello_world.git
+```
 #### Recipe 2: Create a new repo in local git and set it up in remote server
+```
+# Suppose you already in the folder
+$ git init
+$ git add *
+$ git commit -am "Init commits"
+$ git remote add origin git@github.com:john/hello_world.git
+```
 #### Recipe 3: Add existing project in local git and set it up in remote server
+```
+$ git remote add origin git@github.com:john/hello_world.git
+```
 #### Recipe 4: Ignore all my local uncommitted changes
+```
+git reset --hard
+```
 #### Recipe 5: Ignore all my local committed changes and let the latest remote version to overwride my local version
+```
+git reset --hard
+git pull
+
+```
 #### Recipe 6: Remove a file that is currently in git
+```
+git rm hw.py
+```
 #### Recipe 7: Freeze my current development in this branch, allow me to sth else in other branch, I need to come back to this branch and continue to work from where I left.
-
-
+```
+git stash
+git checkout YOUR_BRANCH
+# do something
+git commit -am "some side work"
+git checkout PREVIOUS_BRANCH
+git stash apply
+```
 
 #### FAQ
 1. For quick trouble shooting, I found this cheat sheet is useful:
 https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf
 
-1. 
